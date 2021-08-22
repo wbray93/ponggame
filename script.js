@@ -32,7 +32,7 @@ const theBall = {
   y: 400,
   w: 35,
   h: 35,
-  speed: 20,
+  speed: 6,
   dy: 0,
   dx: 0
 }
@@ -70,7 +70,8 @@ function clear() {
   }
 
   function newBallPos() {
-    theBall.y += theBall.dy
+    theBall.y += theBall.dy;
+    theBall.x += theBall.dx;
   }
 
 //collision dection for paddles and ball  
@@ -98,6 +99,24 @@ function clear() {
     }
   }
 
+  function ballCollisionDetection() {
+    if (theBall.y + theBall.h > canvas.height || theBall.y - theBall.h + 35 < 0) {
+      theBall.dy *= -1;
+    }
+  }
+
+  function paddleOneCollision() {
+    if(theBall.x > playerOne.x && theBall.x < playerOne.x + playerOne.w) {
+      theBall.dx = -theBall.dx;
+    }
+  }
+  
+  function paddleTwoCollision() {
+    if(theBall.x > playerTwo.x -30 && theBall.x < playerTwo.x + playerTwo.w) {
+      theBall.dx = -theBall.dx;
+    }
+  }
+
   //updates the drawn images upon the canvas and initializes and renders //them
 
   function update() {
@@ -108,6 +127,9 @@ function clear() {
   newPos();
   newPosPlayer2();
   newBallPos();
+  ballCollisionDetection();
+  paddleOneCollision();
+  paddleTwoCollision();
 
   requestAnimationFrame(update);
 }
@@ -131,15 +153,16 @@ function moveUp() {
     console.log(moveUpPlayer2);
   }
 
-  function ballMoveUp() {
-    theBall.dy = theBall.speed;
+  function ballMoveGameStart() {
+      theBall.dx = theBall.speed;
+      theBall.dy = theBall.speed;
   }
 
 
   //game start function will start initial ball movement.
   function gameStart(e) {
     if (e.key === ' ' || e.key === 'Space') {
-      ballMoveUp();
+      ballMoveGameStart();
     }
   }
 
