@@ -1,0 +1,10 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 300" width="30" height="300">
+	<title>paddleOne</title>
+	<defs>
+		<image  width="30" height="300" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAEsAQMAAADuO5HzAAAAAXNSR0IB2cksfwAAAANQTFRFAAAAp3o92gAAABRJREFUeJxjYBgFo2AUjIJRMNwAAAXcAAGk/E0OAAAAAElFTkSuQmCC"/>
+	</defs>
+	<style>
+		tspan { white-space:pre }
+	</style>
+	<use id="Background" href="#img1" x="0" y="0" />
+</svg>
