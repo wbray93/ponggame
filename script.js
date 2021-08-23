@@ -32,7 +32,7 @@ const theBall = {
   y: 400,
   w: 35,
   h: 35,
-  speed: 6,
+  speed: 2,
   dy: 0,
   dx: 0
 }
@@ -104,18 +104,36 @@ function clear() {
       theBall.dy *= -1;
     }
   }
+  
+  // {
+  //   if(theBall.x > playerOne.x && theBall.x < playerOne.x + playerOne.w) {
+  //     theBall.dx = -theBall.dx;
+  //   }
+  // }
 
   function paddleOneCollision() {
-    if(theBall.x > playerOne.x && theBall.x < playerOne.x + playerOne.w) {
-      theBall.dx = -theBall.dx;
-    }
-  }
+    if (playerOne.x < theBall.x + theBall.w &&
+      playerOne.x + playerOne.w > theBall.x &&
+      playerOne.y < theBall.y + theBall.h &&
+      playerOne.y + playerOne.h > theBall.y) {
+       theBall.dx = -theBall.dx;
+   }
+}
   
+  //  if(theBall.x > playerTwo.x -30 && theBall.x < playerTwo.x + playerTwo.w) {
+  //   theBall.dx = -theBall.dx;
+  // }
+
+
   function paddleTwoCollision() {
-    if(theBall.x > playerTwo.x -30 && theBall.x < playerTwo.x + playerTwo.w) {
-      theBall.dx = -theBall.dx;
-    }
-  }
+    if (playerTwo.x < theBall.x + theBall.w &&
+      playerTwo.x + playerTwo.w > theBall.x &&
+      playerTwo.y < theBall.y + theBall.h &&
+      playerTwo.y + playerTwo.h > theBall.y) {
+       theBall.dx = -theBall.dx;
+   }
+}
+
 
   //updates the drawn images upon the canvas and initializes and renders //them
 
