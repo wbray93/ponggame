@@ -6,6 +6,7 @@ const ctx = canvas.getContext('2d')
 const paddleOne = document.getElementById('paddleOneSource')
 const paddleTwo = document.getElementById('paddleTwoSource')
 const ball = document.getElementById('ball')
+let playerOneScore = 0;
 
 
 //game objects
@@ -15,7 +16,8 @@ const playerOne = {
     w: 30,
     h: 300,
     speed: 8,
-    dy: 0
+    dy: 0,
+    score: 0
 }
 
 const playerTwo = {
@@ -24,7 +26,8 @@ const playerTwo = {
   w: 30,
   h:300,
   speed: 8,
-  dy: 0
+  dy: 0,
+  score: 0
 }
 
 const theBall = {
@@ -104,12 +107,6 @@ function clear() {
       theBall.dy *= -1;
     }
   }
-  
-  // {
-  //   if(theBall.x > playerOne.x && theBall.x < playerOne.x + playerOne.w) {
-  //     theBall.dx = -theBall.dx;
-  //   }
-  // }
 
   function paddleOneCollision() {
     if (playerOne.x < theBall.x + theBall.w &&
@@ -119,11 +116,6 @@ function clear() {
        theBall.dx = -theBall.dx;
    }
 }
-  
-  //  if(theBall.x > playerTwo.x -30 && theBall.x < playerTwo.x + playerTwo.w) {
-  //   theBall.dx = -theBall.dx;
-  // }
-
 
   function paddleTwoCollision() {
     if (playerTwo.x < theBall.x + theBall.w &&
@@ -133,6 +125,17 @@ function clear() {
        theBall.dx = -theBall.dx;
    }
 }
+
+  //Score drawing and updating.
+  
+  function drawPlayerOneScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#df9115"
+    ctx.fillText('Player One Score: '+playerOne.score);
+    if(theBall.x > canvas.width) {
+      playerOne.score++;
+    }
+  }
 
 
   //updates the drawn images upon the canvas and initializes and renders //them
@@ -148,6 +151,7 @@ function clear() {
   ballCollisionDetection();
   paddleOneCollision();
   paddleTwoCollision();
+  
 
   requestAnimationFrame(update);
 }
