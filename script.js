@@ -35,7 +35,7 @@ const theBall = {
   y: 400,
   w: 35,
   h: 35,
-  speed: 2,
+  speed: 6,
   dy: 0,
   dx: 0
 }
@@ -128,13 +128,28 @@ function clear() {
 
   //Score drawing and updating.
   
-  function drawPlayerOneScore() {
+  function drawPlayerOneAndTwosScore() {
     ctx.font = "16px Arial";
     ctx.fillStyle = "#df9115"
-    ctx.fillText('Player One Score: '+playerOne.score);
-    if(theBall.x > canvas.width) {
+    ctx.fillText('Player One Score: '+playerOne.score, 250, 25);
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#df9115"
+    ctx.fillText('Player Two Score: '+playerTwo.score, 550, 25);
+    if(theBall.x > canvas.width + theBall.w) {
       playerOne.score++;
+      resetBallAfterScore();
+    } else if(theBall.x + theBall.w < 0) {
+      playerTwo.score++;
+      resetBallAfterScore();
     }
+  }
+
+  // ball reset after score function
+  function resetBallAfterScore() {
+    theBall.x = canvas.width/2;
+    theBall.y = canvas.height/2;
+    theBall.speed = 6;
+    theBall.dx = -theBall.dx;
   }
 
 
@@ -151,7 +166,7 @@ function clear() {
   ballCollisionDetection();
   paddleOneCollision();
   paddleTwoCollision();
-  
+  drawPlayerOneAndTwosScore();
 
   requestAnimationFrame(update);
 }
