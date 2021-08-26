@@ -35,7 +35,7 @@ const theBall = {
   y: 400,
   w: 35,
   h: 35,
-  speed: 6,
+  speed: 5,
   dy: 0,
   dx: 0
 }
@@ -148,7 +148,7 @@ function clear() {
   function resetBallAfterScore() {
     theBall.x = canvas.width/2;
     theBall.y = canvas.height/2;
-    theBall.speed = 6;
+    theBall.speed = 5;
     theBall.dx = -theBall.dx;
   }
 
@@ -167,6 +167,7 @@ function clear() {
   paddleOneCollision();
   paddleTwoCollision();
   drawPlayerOneAndTwosScore();
+  gameEnd();
 
   requestAnimationFrame(update);
 }
@@ -240,7 +241,18 @@ function keyUpPlayer2(e) {
       playerTwo.dy = 0;
     }
   }
-
+// Function to alert winning player and reset the game.
+function gameEnd() {
+  if(playerOne.score == 10) {
+    alert("YOU WIN, CONGRATULATIONS Player One!");
+    document.location.reload();
+    clearInterval(interval);
+  } else if(playerTwo.score == 10) {
+  alert('YOU WIN, CONGRATULATIONS Player Two!');
+  document.location.reload();
+  clearInterval(interval);
+  }
+}
 update();
 
 document.addEventListener('keydown', keyDown);
